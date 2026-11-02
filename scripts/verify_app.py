@@ -31,3 +31,4 @@ test_cases = [
     ("வாங்கோ சுகமா", "வாருங்கள் நலமா")
 ]
 print("All basic verification tests passed!")
+

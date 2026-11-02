@@ -1211,12 +1211,202 @@ input:checked + .slider:before {
 }
 
 /* Responsive adjustments */
-@media (max-width: 860px) {
+@media (max-width: 992px) {
+  body {
+    padding: 1rem 0.75rem;
+  }
+  
+  .app-layout {
+    gap: 1.25rem;
+  }
+
   .interactive-grid {
     grid-template-columns: 1fr;
   }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 0.75rem 0.5rem;
+  }
+
   .app-header {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem 1.25rem;
+    gap: 1rem;
+  }
+
+  .brand {
+    justify-content: flex-start;
+  }
+
+  .brand-title {
+    font-size: 1.4rem;
+  }
+
+  .header-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .dialect-badge-container {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .select-dialect {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .btn-icon {
+    align-self: flex-end;
+  }
+
+  .mode-tabs {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .mode-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab-btn {
+    padding: 0.85rem 1.1rem;
+    font-size: 0.92rem;
+  }
+
+  .tab-content {
+    padding: 1.25rem 1rem;
+  }
+
+  .visualizer-stage {
+    padding: 1.1rem;
+  }
+
+  .canvas-wrapper {
+    height: 100px;
+  }
+
+  .record-actions-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.65rem;
+  }
+
+  .btn-main-record,
+  .btn-sub-control {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .editor-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.85rem 1rem;
+  }
+
+  .editor-stats {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .editor-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.75rem 1rem;
+    gap: 0.75rem;
+  }
+
+  .toolbar-group {
+    width: 100%;
+  }
+
+  .tools-right {
+    justify-content: space-between;
+  }
+
+  .punct-btn {
+    min-width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+  }
+
+  .output-textarea-wrapper {
+    padding: 0.85rem;
+  }
+
+  .output-editor {
+    min-height: 250px;
+    padding: 1rem;
+    font-size: 1.15rem;
+  }
+
+  .editor-footer-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem;
+    gap: 0.75rem;
+  }
+
+  .export-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .export-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .footer-hint {
+    text-align: center;
+  }
+
+  .dialect-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .toast {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-title {
+    font-size: 1.25rem;
+  }
+  
+  .brand-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
+  }
+
+  .stat-badge {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.45rem;
+  }
+
+  .drop-zone {
+    padding: 2rem 1rem;
+  }
+
+  .file-meta {
     flex-direction: column;
     align-items: flex-start;
   }
 }
+
