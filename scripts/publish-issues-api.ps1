@@ -82,3 +82,4 @@ foreach ($issue in $issueFiles) {
 }
 
 Write-Host "`nAll issues processing finished!" -ForegroundColor Cyan
+
