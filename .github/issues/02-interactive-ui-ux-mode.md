@@ -27,3 +27,4 @@ Provide a modern, intuitive, and interactive UI/UX for Tamil dictation, featurin
 - [ ] Interim text updates with zero perceptible lag.
 - [ ] Theme switcher switches between light and dark without layout distortion.
 - [ ] Responsive across desktop, tablet, and mobile browsers.
+

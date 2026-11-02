@@ -33,3 +33,4 @@ Place the transcription output window prominently below the audio and input cont
 - [ ] Text can be edited manually at any time without resetting the speech stream.
 - [ ] Quick punctuation inserts cleanly at cursor position.
 - [ ] All export options (.txt, .doc, print, copy) function correctly.
+

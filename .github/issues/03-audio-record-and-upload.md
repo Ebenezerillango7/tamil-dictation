@@ -28,3 +28,4 @@ Provide two audio input workflows: live microphone recording with exportable aud
 - [ ] Drag-and-drop file upload correctly loads valid audio formats.
 - [ ] Audio player plays, pauses, seeks, and changes playback speed smoothly.
 - [ ] Transcription progress indicator accurately tracks playback progress.
+

@@ -23,3 +23,4 @@ Maintain CI/CD pipelines to validate code quality, deploy changes continuously t
 - [ ] CI workflow passes on GitHub Actions runner.
 - [ ] Changes to `main` deploy to GitHub Pages without errors.
 - [ ] Tagging a release publishes a downloadable zip asset.
+

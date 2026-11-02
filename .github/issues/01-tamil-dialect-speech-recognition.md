@@ -31,3 +31,4 @@ Implement speech recognition for Tamil that handles multiple regional dialects a
 - [ ] Spoken dialect words are properly recognized and translated.
 - [ ] Punctuation voice triggers work seamlessly during speech.
 - [ ] Error messages for denied mic permission, no speech, or offline status are shown in Tamil.
+

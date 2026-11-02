@@ -1,114 +1,389 @@
 <!DOCTYPE html>
-<html lang="ta">
+<html lang="ta" data-theme="light">
+
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8">https://github.com/Ebenezerillango7/tamil-dictation.git
+
+  I am going to create this project.
+  I want you to create a workflow for push, pull, deployment and publishing.
+  And setup my VS code for the github ready.
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>தமிழ் குரல் தட்டச்சு | Tamil Voice Dictation</title>
-  <meta name="description" content="Fast, accurate real-time Tamil voice dictation and speech-to-text tool.">
+  <title>தமிழ் குரல் தட்டச்சு மென்பொருள் | Tamil Voice Dictation & Speech to Text</title>
+  <meta name="description"
+    content="Professional Tamil Speech-to-Text software supporting regional dialects, live voice recording, audio file upload, and real-time editable transcription.">
+
+  <!-- Google Fonts: Mukta Malar (Tamil) & Inter (English/UI) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Mukta+Malar:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Mukta+Malar:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <div class="app-container">
+  <div class="app-layout">
+    <!-- Top Header -->
     <header class="app-header">
       <div class="brand">
-        <div class="logo-icon">🎙️</div>
-        <div class="brand-text">
-          <h1>தமிழ் குரல் தட்டச்சு</h1>
-          <p class="subtitle">Tamil Voice Dictation & Speech to Text</p>
+        <div class="brand-icon">
+          <span class="mic-wave">🎙️</span>
+        </div>
+        <div>
+          <h1 class="brand-title">தமிழ் குரல் தட்டச்சு</h1>
+          <p class="brand-tagline">Tamil Voice Dictation & Dialect Speech-to-Text Software</p>
         </div>
       </div>
 
-      <div class="header-controls">
-        <label for="languageSelect" class="sr-only">மொழி தேர்வு</label>
-        <select id="languageSelect" class="lang-selector">
-          <option value="ta-IN" selected>தமிழ் (இந்தியா) - ta-IN</option>
-          <option value="ta-LK">தமிழ் (இலங்கை) - ta-LK</option>
-          <option value="ta-SG">தமிழ் (சிங்கப்பூர்) - ta-SG</option>
-          <option value="ta-MY">தமிழ் (மலேசியா) - ta-MY</option>
-        </select>
+      <div class="header-actions">
+        <!-- Dialect Selector Quick Dropdown -->
+        <div class="dialect-badge-container">
+          <label for="dialectSelect" class="dialect-label">
+            <span class="icon">🗣️</span> வட்டார வழக்கு (Dialect):
+          </label>
+          <select id="dialectSelect" class="select-dialect" title="வட்டார வழக்கு தேர்வு">
+            <option value="ta-IN-standard" data-locale="ta-IN" selected>தமிழ்நாடு - பொதுத் தமிழ் (Standard)</option>
+            <option value="ta-IN-chennai" data-locale="ta-IN">சென்னைத் தமிழ் (Madras Bashai)</option>
+            <option value="ta-IN-madurai" data-locale="ta-IN">மதுரை & தென் தமிழ் (Madurai & South)</option>
+            <option value="ta-IN-kongu" data-locale="ta-IN">கொங்குத் தமிழ் (Kongu - Coimbatore/Salem)</option>
+            <option value="ta-IN-nellai" data-locale="ta-IN">நெல்லைத் தமிழ் (Tirunelveli/Nellai)</option>
+            <option value="ta-LK" data-locale="ta-LK">ஈழத் தமிழ் (Sri Lanka - ta-LK)</option>
+            <option value="ta-SG" data-locale="ta-SG">சிங்கப்பூர் தமிழ் (Singapore - ta-SG)</option>
+            <option value="ta-MY" data-locale="ta-MY">மலேசியத் தமிழ் (Malaysia - ta-MY)</option>
+          </select>
+        </div>
+
+        <!-- Dark / Light Theme Toggle -->
+        <button id="themeToggleBtn" class="btn-icon" title="இருண்ட / வெளிச்ச வடிவம் மாற்றுக">
+          <span id="themeIcon">🌙</span>
+        </button>
       </div>
     </header>
 
-    <main class="main-card">
-      <div class="status-bar">
-        <div class="status-indicator">
-          <span class="status-dot" id="statusDot"></span>
-          <span class="status-text" id="statusText">தயாராக உள்ளது (பேசத் தொடங்க மைக்ரோஃபோனை அழுத்தவும்)</span>
-        </div>
-        <div class="stats">
-          <span>சொற்கள்: <strong id="wordCount">0</strong></span>
-          <span>எழுத்துக்கள்: <strong id="charCount">0</strong></span>
+    <!-- Upper Section: Interactive Mode & Audio Inputs -->
+    <section class="upper-control-panel">
+      <!-- Mode Tabs -->
+      <nav class="mode-tabs" role="tablist">
+        <button class="tab-btn active" id="tabLiveBtn" role="tab" aria-selected="true" data-tab="livePanel">
+          <span class="tab-icon">🔴</span> நேரடி குரல் பதிவு (Live Dictation)
+        </button>
+        <button class="tab-btn" id="tabUploadBtn" role="tab" aria-selected="false" data-tab="uploadPanel">
+          <span class="tab-icon">📁</span> ஆடியோ கோப்பு பதிவேற்றம் (Audio File Upload)
+        </button>
+        <button class="tab-btn" id="tabSettingsBtn" role="tab" aria-selected="false" data-tab="settingsPanel">
+          <span class="tab-icon">⚙️</span> பேச்சு வழக்கு & AI அமைப்புகள் (Dialect Settings)
+        </button>
+      </nav>
+
+      <!-- Panel 1: Live Dictation & Audio Recorder -->
+      <div class="tab-content active" id="livePanel">
+        <div class="interactive-grid">
+          <!-- Visualizer & Microphone Central Stage -->
+          <div class="visualizer-stage">
+            <div class="visualizer-header">
+              <div class="status-indicator-box">
+                <span class="pulse-indicator" id="pulseIndicator"></span>
+                <span class="status-text" id="statusMessage">தயாராக உள்ளது (பேச மைக்ரோஃபோனை அழுத்தவும்)</span>
+              </div>
+              <div class="record-timer" id="recordTimer" title="பதிவு நேரம்">00:00</div>
+            </div>
+
+            <!-- Waveform Canvas -->
+            <div class="canvas-wrapper">
+              <canvas id="waveformCanvas" width="800" height="120"></canvas>
+              <div class="canvas-overlay-text" id="canvasOverlayText">மைக்ரோஃபோன் தயார் நிலையில் உள்ளது</div>
+            </div>
+
+            <!-- Live Speech Interim Subtitles -->
+            <div class="interim-bubble" id="interimBubble">
+              <span class="interim-label">நிகழ்நேர பேச்சு:</span>
+              <span class="interim-text" id="liveInterimText">...</span>
+            </div>
+
+            <!-- Recording Control Buttons -->
+            <div class="record-actions-bar">
+              <button id="startRecordBtn" class="btn-main-record" title="பேசத் தொடங்கு / நிறுத்து">
+                <span class="mic-svg" id="recordMicIcon">🎤</span>
+                <span id="recordBtnLabel">பேசத் தொடங்கு</span>
+              </button>
+
+              <button id="pauseRecordBtn" class="btn-sub-control" disabled title="இடைநிறுத்து">
+                ⏸️ இடைநிறுத்து
+              </button>
+
+              <button id="downloadAudioBtn" class="btn-sub-control" disabled
+                title="பதிவான ஆடியோவை பதிவிறக்கு (.webm/.wav)">
+                💾 ஆடியோவை சேமி
+              </button>
+            </div>
+          </div>
+
+          <!-- Interactive Sidebar Info -->
+          <div class="interactive-sidebar">
+            <div class="card-mini">
+              <h3>🗣️ தேர்ந்தெடுக்கப்பட்ட வட்டாரம்</h3>
+              <p id="dialectDescription" class="dialect-desc">
+                தமிழ்நாடு பொது ஊடக வழக்கு. தூய மற்றும் பொதுவான பேச்சுக்களை உரை வடிவில் மாற்றும்.
+              </p>
+              <div class="dialect-features" id="dialectTags">
+                <span class="tag">இயல்பான வேகம்</span>
+                <span class="tag">அனைத்து சொற்கள்</span>
+              </div>
+            </div>
+
+            <div class="card-mini">
+              <h3>⚡ விரைவு குரல் கட்டளைகள்</h3>
+              <ul class="voice-cmd-list">
+                <li><code>"முற்றுப்புள்ளி"</code> ➔ <strong>.</strong></li>
+                <li><code>"கால்புள்ளி" / "கமா"</code> ➔ <strong>,</strong></li>
+                <li><code>"கேள்விக்குறி"</code> ➔ <strong>?</strong></li>
+                <li><code>"புதிய வரி"</code> ➔ <strong>வரியிறக்கம் (Enter)</strong></li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="editor-container">
-        <textarea
-          id="transcriptionArea"
-          class="transcription-textarea"
-          placeholder="இங்கே உங்கள் குரல் தமிழில் உரையாக தோன்றும்... அல்லது நேரடியாக தட்டச்சு செய்யலாம்."
-          spellcheck="false"
-        ></textarea>
-        <div id="interimText" class="interim-preview"></div>
+      <!-- Panel 2: Audio File Upload & Transcription -->
+      <div class="tab-content" id="uploadPanel">
+        <div class="upload-zone-wrapper">
+          <div class="drop-zone" id="dropZone">
+            <input type="file" id="audioFileInput" accept="audio/*,.mp3,.wav,.ogg,.m4a,.webm,.aac,.flac"
+              class="file-input-hidden">
+            <div class="drop-zone-content">
+              <div class="upload-icon">🎵</div>
+              <h3>ஆடியோ கோப்பை இங்கே இழுத்து விடவும் அல்லது தேர்ந்தெடுக்கவும்</h3>
+              <p>ஆதரவு தரும் வடிவங்கள்: MP3, WAV, M4A, OGG, WEBM, FLAC (அதிகபட்சம் 100MB)</p>
+              <button type="button" class="btn btn-secondary" id="browseFileBtn">📂 கோப்பைத் தேர்ந்தெடு</button>
+            </div>
+          </div>
+
+          <!-- File Information & Player Card -->
+          <div class="file-player-card" id="filePlayerCard" style="display: none;">
+            <div class="file-meta">
+              <div class="file-icon">🎧</div>
+              <div class="file-details">
+                <h4 id="audioFileName">audio-sample.mp3</h4>
+                <div class="file-subdetails">
+                  <span id="audioFileSize">-- MB</span> •
+                  <span id="audioFileDuration">00:00</span> •
+                  <span id="audioFileType">audio/mp3</span>
+                </div>
+              </div>
+              <button id="removeFileBtn" class="btn-close" title="கோப்பை நீக்கு">✕</button>
+            </div>
+
+            <!-- Custom Audio Player Controller -->
+            <div class="audio-player-controls">
+              <audio id="audioPlaybackElement" controls class="native-audio-player"></audio>
+              <div class="transcribe-actions">
+                <button id="transcribeAudioBtn" class="btn btn-primary btn-large">
+                  <span class="icon">✨</span> இந்த ஆடியோவை உரை மாற்றுக (Transcribe to Text)
+                </button>
+                <div class="playback-speed">
+                  <label for="speedSelect">வேகம்:</label>
+                  <select id="speedSelect">
+                    <option value="0.75">0.75x</option>
+                    <option value="1.0" selected>1.0x (இயல்பு)</option>
+                    <option value="1.25">1.25x</option>
+                    <option value="1.5">1.5x</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="transcribe-progress-bar" id="transcribeProgressBox" style="display: none;">
+              <div class="progress-bar-track">
+                <div class="progress-bar-fill" id="progressBarFill" style="width: 0%;"></div>
+              </div>
+              <div class="progress-info">
+                <span id="progressStatusText">ஆடியோ இயக்கப்பட்டு உரை மாற்றப்படுகிறது...</span>
+                <span id="progressPercentage">0%</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="controls-toolbar">
-        <div class="primary-controls">
-          <button id="toggleRecordBtn" class="btn btn-record" title="பேசத் தொடங்க / நிறுத்த">
-            <span class="mic-icon">🎤</span>
-            <span id="recordBtnText">பேசத் தொடங்கு</span>
-          </button>
-          <button id="clearBtn" class="btn btn-outline" title="உரையை அழிக்க">
-            🗑️ அழிக்க
-          </button>
-        </div>
+      <!-- Panel 3: Dialect & Settings Configuration -->
+      <div class="tab-content" id="settingsPanel">
+        <div class="settings-grid">
+          <div class="settings-card">
+            <h3>வட்டார வழக்கு சொல் திருத்தம் (Dialect Vocabulary Normalizer)</h3>
+            <p class="settings-subtext">பேச்சு வழக்கு சொற்களை தானாக தூய எழுத்து வடிவமாக மாற்ற விரும்புகிறீர்களா?</p>
+            <div class="setting-toggle-row">
+              <label class="switch">
+                <input type="checkbox" id="autoNormalizeToggle" checked>
+                <span class="slider"></span>
+              </label>
+              <span class="toggle-label" id="normalizeLabel">எழுத்து வழக்கு தானியங்கி மாற்றம் இயக்கத்தில் உள்ளது
+                (Active)</span>
+            </div>
+            <div class="dialect-preview-box">
+              <strong>எடுத்துக்காட்டு:</strong>
+              <div>வட்டார பேச்சு: <em>"வூட்ல வந்துட்டேன்... என்ன பண்றீங்க?"</em></div>
+              <div>எழுத்து வடிவம்: <strong>"வீட்டில் வந்துவிட்டேன்... என்ன செய்கிறீர்கள்?"</strong></div>
+            </div>
+          </div>
 
-        <div class="export-controls">
-          <button id="copyBtn" class="btn btn-secondary" title="நகலெடுக்க">
-            📋 நகலெடு (Copy)
-          </button>
-          <button id="downloadTxtBtn" class="btn btn-secondary" title="Text கோப்பாக பதிவிறக்க">
-            📄 .TXT
-          </button>
-          <button id="downloadDocBtn" class="btn btn-secondary" title="Word ஆவணமாக பதிவிறக்க">
-            📝 .DOC
-          </button>
-        </div>
-      </div>
-    </main>
-
-    <section class="tips-section">
-      <h3>💡 பயன்பாட்டு குறிப்புகள் (Tips)</h3>
-      <div class="tips-grid">
-        <div class="tip-card">
-          <h4>தெளிவான உச்சரிப்பு</h4>
-          <p>மைக்ரோஃபோன் அருகில் அமைதியான சூழலில் இயல்பான வேகத்தில் பேசுங்கள்.</p>
-        </div>
-        <div class="tip-card">
-          <h4>Chrome & Edge ஆதரவு</h4>
-          <p>Google Chrome அல்லது Microsoft Edge உலாவிகளில் சிறந்த முறையில் செயல்படும்.</p>
-        </div>
-        <div class="tip-card">
-          <h4>ஆவண ஏற்றுமதி</h4>
-          <p>பேசி முடித்த பின் ஒரே கிளிக்கில் நகலெடுக்கலாம் அல்லது Word / Text கோப்பாக சேமிக்கலாம்.</p>
+          <div class="settings-card">
+            <h3>AI கிளவுட் டிரான்ஸ்கிரிப்ஷன் (விருப்பத்தேர்வு)</h3>
+            <p class="settings-subtext">நீண்ட ஆடியோ கோப்புகளுக்கு Gemini / OpenAI API கீ வழங்கலாம் (அவசியமில்லை; உலாவி
+              முறையே இலவசமாக இயங்கும்).</p>
+            <div class="api-key-input-group">
+              <label for="apiKeyInput">Gemini / Whisper API Key:</label>
+              <input type="password" id="apiKeyInput" placeholder="AI API Key (விருப்பத்தேர்வு)" class="input-text">
+              <button id="saveApiKeyBtn" class="btn btn-secondary">சேமிக்க</button>
+            </div>
+            <small class="muted-note">🔒 உங்கள் API கீ உங்கள் உலாவியின் LocalStorage-ல் மட்டுமே இருக்கும்.</small>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- Lower Section: Output Text Window & Manual Editor -->
+    <main class="lower-output-panel">
+      <div class="editor-window-card">
+        <!-- Editor Header & Toolbar -->
+        <div class="editor-header">
+          <div class="editor-title-box">
+            <span class="window-dot red"></span>
+            <span class="window-dot yellow"></span>
+            <span class="window-dot green"></span>
+            <h2>டிரான்ஸ்கிரிப்ஷன் வெளியீட்டுப் பலகை (Transcription Output & Editor Window)</h2>
+          </div>
+
+          <div class="editor-stats">
+            <span class="stat-badge">சொற்கள்: <strong id="outWordCount">0</strong></span>
+            <span class="stat-badge">எழுத்துக்கள்: <strong id="outCharCount">0</strong></span>
+            <span class="stat-badge">பேசும் நேரம்: <strong id="outSpeakingTime">~0 வினாடி</strong></span>
+          </div>
+        </div>
+
+        <!-- Formatting & Action Toolbar -->
+        <div class="editor-toolbar">
+          <div class="toolbar-group">
+            <span class="group-title">விரைவு நிறுத்தற்குறிகள்:</span>
+            <button type="button" class="tool-btn punct-btn" data-punct="." title="முற்றுப்புள்ளி">.</button>
+            <button type="button" class="tool-btn punct-btn" data-punct="," title="கால்புள்ளி">,</button>
+            <button type="button" class="tool-btn punct-btn" data-punct="?" title="கேள்விக்குறி">?</button>
+            <button type="button" class="tool-btn punct-btn" data-punct="!" title="ஆச்சரியக்குறி">!</button>
+            <button type="button" class="tool-btn punct-btn" data-punct='"' title="மேற்கோள் குறி">" "</button>
+            <button type="button" class="tool-btn punct-btn" data-punct="(" title="அடைப்புக்குறி">( )</button>
+            <button type="button" class="tool-btn punct-btn" data-punct=":" title="முக்காற்புள்ளி">:</button>
+            <button type="button" class="tool-btn punct-btn" data-punct="-" title="இணைப்புக் கோடு">-</button>
+          </div>
+
+          <div class="toolbar-group tools-right">
+            <!-- Dialect Normalize Button -->
+            <button id="manualNormalizeBtn" class="btn btn-sm btn-dialect-convert"
+              title="பேச்சு சொற்களை எழுத்து வடிவமாக மாற்றுக">
+              ✨ எழுத்து வடிவாக்குக
+            </button>
+
+            <!-- Search & Replace Toggle -->
+            <button id="toggleSearchBtn" class="btn btn-sm btn-outline" title="தேடல் & மாற்று">
+              🔍 தேடுக
+            </button>
+
+            <!-- Font Size -->
+            <div class="font-size-adjuster" title="எழுத்து அளவு மாற்றி">
+              <button id="decreaseFontBtn" class="btn-mini">A-</button>
+              <button id="resetFontBtn" class="btn-mini">A</button>
+              <button id="increaseFontBtn" class="btn-mini">A+</button>
+            </div>
+
+            <!-- Clear text -->
+            <button id="clearEditorBtn" class="btn btn-sm btn-danger-outline" title="உரையை அழிக்க">
+              🗑️ அழிக்க
+            </button>
+          </div>
+        </div>
+
+        <!-- Search & Replace Drawer (Toggleable) -->
+        <div class="search-drawer" id="searchDrawer" style="display: none;">
+          <input type="text" id="findInput" placeholder="தேட வேண்டிய சொல்..." class="search-input">
+          <input type="text" id="replaceInput" placeholder="மாற்ற வேண்டிய சொல்..." class="search-input">
+          <button id="replaceBtn" class="btn btn-sm btn-secondary">ஒன்றை மாற்று</button>
+          <button id="replaceAllBtn" class="btn btn-sm btn-primary">அனைத்தும் மாற்று</button>
+          <button id="closeSearchBtn" class="btn-mini">✕</button>
+        </div>
+
+        <!-- The Editable Output Window -->
+        <div class="output-textarea-wrapper">
+          <textarea id="outputEditorArea" class="output-editor"
+            placeholder="இங்கு உங்கள் குரல் அல்லது ஆடியோ கோப்பின் உரை தமிழில் தோன்றும்... நீங்கள் நேரடியாக இங்கு தட்டச்சு செய்து திருத்தங்களை (Manual Edit) மேற்கொள்ளலாம்."
+            spellcheck="false"></textarea>
+        </div>
+
+        <!-- Lower Export & Delivery Toolbar -->
+        <div class="editor-footer-toolbar">
+          <div class="export-actions">
+            <button id="copyOutputBtn" class="btn btn-primary" title="உரையை நகலெடுக்க">
+              📋 நகலெடு (Copy Text)
+            </button>
+            <button id="downloadTxtBtn" class="btn btn-secondary" title="TXT கோப்பாக சேமிக்க">
+              📄 .TXT கோப்பு
+            </button>
+            <button id="downloadDocBtn" class="btn btn-secondary" title="Word ஆவணமாக சேமிக்க">
+              📝 Word (.DOC)
+            </button>
+            <button id="printBtn" class="btn btn-secondary" title="அச்சிட அல்லது PDF ஆக சேமிக்க">
+              🖨️ PDF / அச்சிடு
+            </button>
+          </div>
+
+          <div class="footer-hint">
+            <span>✏️ இந்த பலகையில் உள்ள உரையை நீங்கள் முழுமையாக திருத்தலாம்.</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Guide / Dialect Knowledge Section -->
+    <section class="dialect-info-section">
+      <div class="info-card">
+        <h3>📚 வட்டார வழக்குகள் வழிகாட்டி (Dialect Guide)</h3>
+        <div class="dialect-columns">
+          <div class="dialect-col">
+            <h4>சென்னைத் தமிழ் (Madras)</h4>
+            <p>கலாய்க்காத, நைனா, கஸ்மாலம், அப்பாலிக்கா, காசு-துட்டு, பேஜார் போன்ற பேச்சுக்களை அடையாளம் கண்டு
+              சீரமைக்கும்.</p>
+          </div>
+          <div class="dialect-col">
+            <h4>கொங்குத் தமிழ் (Kongu)</h4>
+            <p>வாங்கூ, போவலியா, வூட்ல, கண்ணு, வந்தாப்பிள போன்ற கோவை மற்றும் சேலப் பகுதி மரபுச் சொற்களை தூய தமிழாக்கும்.
+            </p>
+          </div>
+          <div class="dialect-col">
+            <h4>மதுரை & நெல்லை (Southern)</h4>
+            <p>வந்தாக, போனாக, அங்கிட்டு, இங்கிட்டு, ஏல, அண்ணாச்சி போன்ற தென் தமிழக வட்டாரச் சொற்களை கையாளும்.</p>
+          </div>
+          <div class="dialect-col">
+            <h4>ஈழத் தமிழ் (Sri Lanka)</h4>
+            <p>கதைக்கிறன், விளங்குது, சுகம், இஞ்சால வாங்கோ போன்ற ஈழத்தமிழின் இலக்கண நயத்தை முழுமையாக உரை மாற்றும்.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- App Footer -->
     <footer class="app-footer">
       <p>
-        Tamil Dictation Open Source Project | 
+        தமிழ் குரல் தட்டச்சு மென்பொருள் (Tamil Voice Dictation Software) |
         <a href="https://github.com/Ebenezerillango7/tamil-dictation" target="_blank" rel="noopener noreferrer">
           GitHub Repository
-        </a>
+        </a> | Open Source GNU GPL v3
       </p>
     </footer>
   </div>
 
-  <div id="toast" class="toast">செய்தி நகலெடுக்கப்பட்டது!</div>
+  <!-- Notification Toast -->
+  <div id="toastNotification" class="toast">செய்தி நகலெடுக்கப்பட்டது!</div>
 
+  <!-- Main JavaScript Application Logic -->
   <script src="app.js"></script>
 </body>
+
 </html>

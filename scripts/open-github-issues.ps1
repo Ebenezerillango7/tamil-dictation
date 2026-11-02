@@ -38,11 +38,11 @@ foreach ($item in $issues) {
     if (Test-Path $item.File) {
         $body = Get-Content $item.File -Raw
     }
-    
+
     $encodedTitle = [System.Uri]::EscapeDataString($item.Title)
     $encodedBody  = [System.Uri]::EscapeDataString($body)
     $encodedLabels = [System.Uri]::EscapeDataString($item.Labels)
-    
+
     $url = "$repoUrl`?title=$encodedTitle&body=$encodedBody&labels=$encodedLabels"
     Write-Host "`nOpening: $($item.Title)" -ForegroundColor Green
     Start-Process $url
@@ -50,3 +50,4 @@ foreach ($item in $issues) {
 }
 
 Write-Host "`nAll issue links opened in browser!" -ForegroundColor Cyan
+
