@@ -5,27 +5,25 @@ param (
     [string]$Message = ""
 )
 
-$ErrorActionPreference = "Stop"
-
-Write-Host "=== 🔄 Tamil Dictation Git Sync ===" -ForegroundColor Cyan
+Write-Host "=== [SYNC] Tamil Dictation Git Sync ===" -ForegroundColor Cyan
 
 # 1. Pull latest changes safely
-Write-Host "`n1. Pulling latest updates from origin/main..." -ForegroundColor Yellow
-try {
-    git pull --rebase --autostash origin main
-    Write-Host "✓ Pulled and synchronized." -ForegroundColor Green
-} catch {
-    Write-Host "⚠️ Warning during pull. Continuing..." -ForegroundColor DarkYellow
+Write-Host "`n[1/4] Pulling latest updates from origin/main..." -ForegroundColor Yellow
+git pull --rebase --autostash origin main
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "[!] Note: Pull completed with status code $LASTEXITCODE. Continuing..." -ForegroundColor DarkYellow
+} else {
+    Write-Host "[OK] Synced with origin/main." -ForegroundColor Green
 }
 
 # 2. Stage changes
-Write-Host "`n2. Staging all modified files..." -ForegroundColor Yellow
+Write-Host "`n[2/4] Staging modified files..." -ForegroundColor Yellow
 git add -A
 
 # 3. Check status
 $status = git status --porcelain
 if (-not $status) {
-    Write-Host "✓ Working tree is clean. Nothing new to commit." -ForegroundColor Green
+    Write-Host "[OK] Working tree is clean. Nothing to commit." -ForegroundColor Green
     exit 0
 }
 
@@ -35,16 +33,20 @@ if (-not $Message) {
 }
 
 if (-not $Message) {
-    $Message = "Update Tamil Dictation project files"
+    $Message = "Update Tamil Dictation files"
 }
 
 # 5. Commit
-Write-Host "`n3. Committing changes: '$Message'..." -ForegroundColor Yellow
+Write-Host "`n[3/4] Committing changes: '$Message'..." -ForegroundColor Yellow
 git commit -m "$Message"
 
 # 6. Push
-Write-Host "`n4. Pushing to origin/main..." -ForegroundColor Yellow
+Write-Host "`n[4/4] Pushing to origin/main..." -ForegroundColor Yellow
 git push origin main
 
-Write-Host "`n✅ Successfully pushed to GitHub!" -ForegroundColor Green
-Write-Host "GitHub Repo: https://github.com/Ebenezerillango7/tamil-dictation" -ForegroundColor Cyan
+if ($LASTEXITCODE -eq 0) {
+    Write-Host "`n[SUCCESS] Pushed to GitHub successfully!" -ForegroundColor Green
+    Write-Host "Repository URL: https://github.com/Ebenezerillango7/tamil-dictation" -ForegroundColor Cyan
+} else {
+    Write-Host "`n[ERROR] Push failed with exit code $LASTEXITCODE." -ForegroundColor Red
+}
