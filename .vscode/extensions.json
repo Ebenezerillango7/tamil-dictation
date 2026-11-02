@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "GitHub.vscode-pull-request-github",
+    "eamodio.gitlens",
+    "mhutchie.git-graph",
+    "ritwickdey.LiveServer",
+    "esbenp.prettier-vscode",
+    "streetsidesoftware.code-spell-checker"
+  ]
+}

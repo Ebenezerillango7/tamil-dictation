@@ -1,0 +1,23 @@
+{
+  "git.autofetch": "all",
+  "git.autofetchPeriod": 180,
+  "git.autoStash": true,
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  "git.smartCommitChanges": "all",
+  "git.pullBeforePush": true,
+  "git.pruneOnFetch": true,
+  "git.showPushSuccessNotification": true,
+  "git.branchPrefix": "feature/",
+  "git.openRepositoryInParentFolders": "always",
+  "github.gitProtocol": "https",
+  "githubPullRequests.remotes": [
+    "origin"
+  ],
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.autoSave": "onFocusChange",
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true
+}

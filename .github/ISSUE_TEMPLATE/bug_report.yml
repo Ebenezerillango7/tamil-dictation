@@ -1,0 +1,37 @@
+name: 🐛 Bug Report
+description: Create a report to help us improve Tamil Dictation
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for taking the time to report an issue!
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      options:
+        - Google Chrome
+        - Microsoft Edge
+        - Mozilla Firefox
+        - Safari
+        - Mobile Browser (Android / iOS)
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this?
+      placeholder: |
+        1. Click 'பேசத் தொடங்கு'
+        2. Speak Tamil words
+        3. See error
+    validations:
+      required: true

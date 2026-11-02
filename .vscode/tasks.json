@@ -1,0 +1,53 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Git: Pull Latest (origin/main)",
+      "type": "shell",
+      "command": "git pull --rebase --autostash origin main",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "group": "none"
+    },
+    {
+      "label": "Git: Push to Remote (origin/main)",
+      "type": "shell",
+      "command": "git push origin main",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "group": "none"
+    },
+    {
+      "label": "Git: Check Status",
+      "type": "shell",
+      "command": "git status -s",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "group": "none"
+    },
+    {
+      "label": "Dev: Preview Local Web Server (Port 3000)",
+      "type": "shell",
+      "command": "python -m http.server 3000",
+      "problemMatcher": [],
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}

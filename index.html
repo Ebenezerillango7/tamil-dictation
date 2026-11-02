@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>தமிழ் குரல் தட்டச்சு | Tamil Voice Dictation</title>
+  <meta name="description" content="Fast, accurate real-time Tamil voice dictation and speech-to-text tool.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mukta+Malar:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="brand">
+        <div class="logo-icon">🎙️</div>
+        <div class="brand-text">
+          <h1>தமிழ் குரல் தட்டச்சு</h1>
+          <p class="subtitle">Tamil Voice Dictation & Speech to Text</p>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <label for="languageSelect" class="sr-only">மொழி தேர்வு</label>
+        <select id="languageSelect" class="lang-selector">
+          <option value="ta-IN" selected>தமிழ் (இந்தியா) - ta-IN</option>
+          <option value="ta-LK">தமிழ் (இலங்கை) - ta-LK</option>
+          <option value="ta-SG">தமிழ் (சிங்கப்பூர்) - ta-SG</option>
+          <option value="ta-MY">தமிழ் (மலேசியா) - ta-MY</option>
+        </select>
+      </div>
+    </header>
+
+    <main class="main-card">
+      <div class="status-bar">
+        <div class="status-indicator">
+          <span class="status-dot" id="statusDot"></span>
+          <span class="status-text" id="statusText">தயாராக உள்ளது (பேசத் தொடங்க மைக்ரோஃபோனை அழுத்தவும்)</span>
+        </div>
+        <div class="stats">
+          <span>சொற்கள்: <strong id="wordCount">0</strong></span>
+          <span>எழுத்துக்கள்: <strong id="charCount">0</strong></span>
+        </div>
+      </div>
+
+      <div class="editor-container">
+        <textarea
+          id="transcriptionArea"
+          class="transcription-textarea"
+          placeholder="இங்கே உங்கள் குரல் தமிழில் உரையாக தோன்றும்... அல்லது நேரடியாக தட்டச்சு செய்யலாம்."
+          spellcheck="false"
+        ></textarea>
+        <div id="interimText" class="interim-preview"></div>
+      </div>
+
+      <div class="controls-toolbar">
+        <div class="primary-controls">
+          <button id="toggleRecordBtn" class="btn btn-record" title="பேசத் தொடங்க / நிறுத்த">
+            <span class="mic-icon">🎤</span>
+            <span id="recordBtnText">பேசத் தொடங்கு</span>
+          </button>
+          <button id="clearBtn" class="btn btn-outline" title="உரையை அழிக்க">
+            🗑️ அழிக்க
+          </button>
+        </div>
+
+        <div class="export-controls">
+          <button id="copyBtn" class="btn btn-secondary" title="நகலெடுக்க">
+            📋 நகலெடு (Copy)
+          </button>
+          <button id="downloadTxtBtn" class="btn btn-secondary" title="Text கோப்பாக பதிவிறக்க">
+            📄 .TXT
+          </button>
+          <button id="downloadDocBtn" class="btn btn-secondary" title="Word ஆவணமாக பதிவிறக்க">
+            📝 .DOC
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <section class="tips-section">
+      <h3>💡 பயன்பாட்டு குறிப்புகள் (Tips)</h3>
+      <div class="tips-grid">
+        <div class="tip-card">
+          <h4>தெளிவான உச்சரிப்பு</h4>
+          <p>மைக்ரோஃபோன் அருகில் அமைதியான சூழலில் இயல்பான வேகத்தில் பேசுங்கள்.</p>
+        </div>
+        <div class="tip-card">
+          <h4>Chrome & Edge ஆதரவு</h4>
+          <p>Google Chrome அல்லது Microsoft Edge உலாவிகளில் சிறந்த முறையில் செயல்படும்.</p>
+        </div>
+        <div class="tip-card">
+          <h4>ஆவண ஏற்றுமதி</h4>
+          <p>பேசி முடித்த பின் ஒரே கிளிக்கில் நகலெடுக்கலாம் அல்லது Word / Text கோப்பாக சேமிக்கலாம்.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="app-footer">
+      <p>
+        Tamil Dictation Open Source Project | 
+        <a href="https://github.com/Ebenezerillango7/tamil-dictation" target="_blank" rel="noopener noreferrer">
+          GitHub Repository
+        </a>
+      </p>
+    </footer>
+  </div>
+
+  <div id="toast" class="toast">செய்தி நகலெடுக்கப்பட்டது!</div>
+
+  <script src="app.js"></script>
+</body>
+</html>
