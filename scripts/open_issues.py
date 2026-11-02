@@ -54,3 +54,4 @@ for idx, issue in enumerate(issues, 1):
     time.sleep(0.5)
 
 print("\nAll 5 issue creation pages opened in your browser!")
+

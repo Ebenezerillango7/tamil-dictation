@@ -85,3 +85,4 @@ for idx, issue in enumerate(issues, 1):
         print(f"[{idx}/5] Error: {e}")
 
 print("\nDone!")
+
